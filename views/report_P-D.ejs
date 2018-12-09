@@ -1,0 +1,33 @@
+ <% include partials/header.ejs %>
+<br><br>
+<h1 align="center"><% if(type === "production"){ %>Production<% } else if(type === 'dispatch') {%>Dispatch<%} else {%>By Description<% } %> Report</h1>
+<div class="container jumbotron">
+  <form action="/report/<%=type%>" method="post">
+      <div class="row">
+        <label for="name">Description/Part Number:
+        <select class="form-control" name="name" id="name">
+          <option value="" hidden>Select..</option>
+          <% for(var i=0;i<finished_goods.length;i++){ %>
+            <option value="<%= finished_goods[i].code %>"><%= finished_goods[i].code %>$<%= finished_goods[i].name %></option>
+          <% } %>
+        </select></label>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="from">From: </label>
+          <input type="date" name="from" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="to">To: </label>
+          <input type="date" name="to" class="form-control">
+        </div>
+      </div>
+      <br><br>
+      <button type="submit" class="btn btn-success">Submit!!</button>
+  </form>
+</div>
+
+<script type="text/javascript">
+  $("#name").combobox();
+</script>
+<% include partials/footer.ejs %>

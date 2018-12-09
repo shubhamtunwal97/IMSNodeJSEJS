@@ -1,0 +1,25 @@
+<% include partials/header.ejs %>
+<br><br>
+<div class="container">
+	<h1 align="center">Raw Material Inward</h1>
+	<br>
+	<form action="/input" method="post" class="form">
+		<div  class="form-group mb-2 col-lg-8 form-row">
+			<div class="col">
+				<label for="PO"><strong>PO Number</strong></label>
+			</div>
+			<div class="col">
+					<select name="PO" class="form-control" id="PO">
+							<option value="" hidden selected>Select</option>
+						<% for(var i=0;i<POs.length;i++){ %>
+							<option value="<%= POs[i].code %>"><%= POs[i].code %>,<%= POs[i].supplier_code %></option>
+						<% } %>
+					</select>
+			</div>
+			<div class="col">
+				<input type="submit" class="btn btn-primary" value="Submit">
+			</div>
+		</div>
+	</form>
+</div>
+<% include partials/footer.ejs %>

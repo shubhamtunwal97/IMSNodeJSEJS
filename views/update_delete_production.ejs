@@ -1,0 +1,27 @@
+<% include ./partials/header.ejs %>
+<br><br>
+<h1 align="center">Production</h1>
+<br><br>
+<div class="container">
+  <table class="table table-bordered table-stripped">
+    <thead class="thead-dark">
+      <th>Part Number</th>
+      <th>Quantity</th>
+      <th>Date</th>
+      <th>#</th>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<finished_goods.length;i++) {%>
+        <form action="/finished_good/production/<%= finished_goods[i].FG_code %>/<%= finished_goods[i].date %>/<%= finished_goods[i].quantity %>?_method=DELETE" method="POST"  onsubmit="return confirm('Do you want to submit?');">
+          <tr>
+            <td><%= finished_goods[i].FG_code %></td>
+            <td><%= finished_goods[i].quantity %></td>
+            <td><%= finished_goods[i].date %></td>
+            <td><button type="submit" class="btn btn-danger">Delete</button></td>
+          </tr>
+        </form>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+<% include ./partials/footer.ejs %>

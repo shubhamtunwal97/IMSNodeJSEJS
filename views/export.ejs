@@ -1,0 +1,45 @@
+<% include partials/header.ejs %>
+<br><br>
+<div class="container-fluid">
+  <form class="form" action="/PO/generate" method="post">
+    <table class="table table-striped table-bordered table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th>#</th>
+					<th>Description</th>
+					<th>Part Number</th>
+					<th>DTPL Part Number</th>
+					<th>Category</th>
+          <th>Stock</th>
+					<th>Supplier</th>
+					<th>Net Requirement</th>
+					<th>Unit</th>
+					<th>PO Number</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for(var i=0;i<data.raw_name.length;i++){ %>
+					<tr>
+						<td><%= i+1 %></td>
+						<td><%= data.raw_name[i]%> %><input type="hidden" name="raw_name[<%=i%>]" value="<%=data.raw_name[i]%>"></td>
+						<td><%= data.raw_code[i] %></td>
+						<td><%= data.DTPL_code[i] %><input type="hidden" name="DTPL_code[<%=i%>]" value="<%=data.DTPL_code[i]%>"></td>
+						<td><%= data.raw_category[i] %></td>
+						<td><%= data.supplier[i] %><input type="hidden" name="supplier[<%=i%>]" value="<%= data.supplier[i] %>"></td>
+            <td><%= data.stock[i] %></td>
+						<td><%= data.quantity[i] %><input type="hidden" name="quantity[<%= i %>]" value="<%= data.quantity[i] %>"></td>
+						<td><%= data.raw_unit[i] %></td>
+						<td><%= data.PO[i] %><input type="hidden" name="PO[<%= i %>]" value="<%= data.PO[i] %>"></td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+		<% if(!mock) { %>
+    	<button type="submit" class="btn btn-success">Generate POs</button>
+    <% } %>
+  </form>
+</div>
+<script type="text/javascript">
+  new TableExport(document.getElementsByTagName("table"),{bootstrap:false,headers:true,formats:['csv','xls','xlsx'],ignoreCols:[0]});
+</script>
+<% include partials/footer.ejs %>

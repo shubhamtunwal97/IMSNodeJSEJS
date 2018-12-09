@@ -1,0 +1,1 @@
+{"message":{"where":"POST /supplier/new INSERT INTO supplier SET ?","what":{"name":"Ankit Suppliers","code":"ANKIT","address1":"PO-12","address2":"PP-21","city":"Chennai","state":"TN","GST_no":"1241414","PAN_no":"748347"},"time":"2018-10-30T04:05:23.346Z"},"level":"info"}

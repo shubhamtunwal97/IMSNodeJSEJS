@@ -1,0 +1,57 @@
+<% include partials/header.ejs %>
+<div class="container jumbotron">
+	<h1 align="center">Create New Supplier</h1>
+	<br>
+	<form action="/supplier/new" method="post" onsubmit="return confirm('Are you sure you want to create this Supplier?');">
+	<div class="row">
+			<div class="col-md-6">
+				<label for="supplier.name">Name</label>
+				<input type="text" required id="supplier.name" name="supplier[name]" class="form-control" placeholder="Name" >
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label for="supplier.code">Code</label>
+				<input type="text" required id="supplier.code" name="supplier[code]" class="form-control" placeholder="Code">
+			</div>
+		</div>
+		<br>
+		<h4>Address Details</h4>
+		<div class="row">
+			<div class="col-md-6">
+				<label for="supplier.address1">Address 1</label>
+				<input type="text" required id="supplier.address1" name="supplier[address1]" class="form-control" placeholder="Address 1">
+			</div>
+			<div class="col-md-6">
+				<label for="supplier.address2">Address 2</label>
+				<input type="text" id="supplier.address2" name="supplier[address2]" class="form-control" placeholder="Address 2">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label for="supplier.city">City</label>
+				<input type="text" required id="supplier.city" name="supplier[city]" class="form-control" placeholder="City">
+			</div>
+			<div class="col-md-6">
+				<label for="supplier.state">State</label>
+				<input type="text" required id="supplier.state" name="supplier[state]" class="form-control" placeholder="State">
+			</div>
+		</div>
+		<br>
+		<h4>GST Details</h4>
+		<div class="row">
+			<div class="col-md-6">
+				<label for="">GST Number</label>
+				<input type="text" required id="supplier.GST_no" name="supplier[GST_no]" class="form-control" placeholder="GST Number">
+			</div>
+			<div class="col-md-6">
+				<label for="">PAN Number</label>
+				<input type="text" required id="supplier.PAN_no" name="supplier[PAN_no]" class="form-control" placeholder="PAN Number">
+			</div>
+		</div>
+		<br>
+	<button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+</div>
+<% include partials/footer.ejs %>

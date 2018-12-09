@@ -1,0 +1,28 @@
+<% include ./partials/header.ejs %>
+<br><br>
+<h1 align="center">Dispatch</h1>
+<div class="container">
+  <table class="table table-stripped table-bordered">
+    <thead>
+      <th>Invoice Number</th>
+      <th>Date</th>
+      <th>Part Number</th>
+      <th>Quantity</th>
+      <th>#</th>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<finished_goods.length;i++) { %>
+        <form action="/finished_good/dispatch/<%= finished_goods[i].invoice_no %>/<%= finished_goods[i].FG_code %>?_method=DELETE" method="POST"  onsubmit="return confirm('Do you want to submit?');">
+          <tr>
+            <td><%= finished_goods[i].invoice_no %></td>
+            <td><%= finished_goods[i].date %></td>
+            <td><%= finished_goods[i].FG_code %></td>
+            <td><%= finished_goods[i].quantity %></td>
+            <td><button type="submit" class="btn btn-danger">Delete</button></td>
+          </tr>
+        </form>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+<% include ./partials/footer.ejs %>

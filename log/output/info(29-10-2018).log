@@ -1,0 +1,2 @@
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /output SELECT * FROM raw_material","time":"2018-10-29T13:31:16.933Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /output SELECT * FROM raw_material","time":"2018-10-29T13:37:32.480Z"},"level":"error"}

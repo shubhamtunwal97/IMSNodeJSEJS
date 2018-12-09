@@ -1,0 +1,19 @@
+<% include partials/header.ejs %>
+<br>
+<h1 align="center">Report By PO</h1>
+<div class="container jumbotron">
+	<form action="/report/PO" method="post">
+		<div class="row">
+			<select name="PO[code]">
+				<option value="" hidden selected>Select PO Number</option>
+				<% for(var i=0;i<PO.length;i++){ %>
+					<option value="<%= PO[i].code %>"><%= PO[i].code %>,<%= PO[i].supplier_code %></option>
+				<% } %>
+			</select>
+			<button type="submit" class="btn btn-success">View Report</button>
+		</div>
+	</form>
+</div>
+
+
+<% include partials/footer.ejs %>

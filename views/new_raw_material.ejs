@@ -1,0 +1,64 @@
+<% include partials/header.ejs %>
+<div class="container jumbotron">
+	<h1 align="center">Create New Raw Material</h1>
+	<br>
+	<form action="/inventory/new" method="post" class="form" onsubmit="return confirm('Are you sure you want to create this Raw Material?');">
+		<div class="form-row">
+			<div class="col-md-4">
+				<label for="raw_material[name]">Name</label>
+				<input type="text" name="raw_material[name]" required id="raw_material[name]" class="form-control" placeholder="Name" >
+			</div>
+			<div class="col-md-4">
+				<label for="raw_material[code]">Part Number</label>
+				<input type="text" name="raw_material[code]" id="raw_material[code]" required class="form-control" placeholder="Part Number" >
+			</div>
+			<div class="col-md-4">
+				<label for="raw_material[unit]">Unit</label>
+				<input type="number" min="0"  name="raw_material[unit]" id="raw_material[unit]" required class="form-control" placeholder="Unit" >
+			</div>
+		</div>
+		<br>
+		<div class="form-row">
+			<div class="col-md-4">
+				<label>DTPL Part Number<input type="text" name="raw_material[DTPL_code]" class="form-control" placeholder="DTPL Part Number">
+			</div>
+			<div class="col-md-4">
+				<label for="raw_material[stock]">Initial Stock</label>
+				<input type="number" name="raw_material[stock]" required id="raw_material[stock]" class="form-control" placeholder="Initial Stock" >
+			</div>
+			<div class="col-md-4">
+				<label for="raw_material[category]">Category</label>
+				<select name="raw_material[category]" id="raw_material[category]" required class="form-control">
+					<option value="" hidden selected>Select Category</option>
+					<option value="Coil">Coil</option>
+					<option value="Conector">Conector</option>
+					<option value="Consumables">Consumables</option>
+					<option value="Fuse">Fuse</option>
+					<option value="Grommet">Grommet</option>
+					<option value="Misc.">Misc.</option>
+					<option value="Sleeve">Sleeve</option>
+					<option value="Sticker">Sticker</option>
+					<option value="Tape">Tape</option>
+					<option value="Terminal">Terminal</option>
+					<option value="Wire">Wire</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<label>Price: <input type="number" min="0"  name="raw_material[price]" required class="form-control" placeholder="Price" ></label>
+			</div>
+			<div class="col">
+				<label>Supplier:<select name="raw_material[supplier_code]" required class="form-control">
+					<option value="" hidden selected>Select Supplier</option>
+					<% for(var i=0;i<supplier_code.length;i++){ %>
+						<option value="<%= supplier_code[i].code %>"><%= supplier_code[i].code %></option>
+					<% } %>
+				</select></label>
+			</div>
+		</div>
+	<input type="hidden" name="raw_material[monthly_requirement]" value="0">
+	<button type="submit" class="btn btn-success">Submit</button>
+	</form>
+</div>
+<% include partials/footer.ejs %>

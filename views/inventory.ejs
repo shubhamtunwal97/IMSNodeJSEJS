@@ -1,0 +1,81 @@
+<% include partials/header.ejs %>
+<br>
+<div class="container-fluid">
+	<h1 align="center">Inventory</h1>
+	<br>
+	<div class="row">
+		<div class="col-md-10">
+			
+		</div>
+		<div style="float:right">
+				<form action="/inventory/search/name" method="post" class="form-inline">
+					<select name="name_code" class="form-control" id="name_code">
+						<option value="" hidden selected>Enter Descr OR P/N</option>
+							<% for(var i=0;i<raw_materials.length;i++){ %>
+								<option value="<%= raw_materials[i].name %>,<%= raw_materials[i].code %>"><%= raw_materials[i].name %>/<%= raw_materials[i].code %></option>
+							<% } %>
+						<select>
+					<button type="submit" class="btn btn-dark">Go!</button>
+				</form>
+		</div>
+	</div>
+	<script>
+		$('#name_code').combobox();
+	</script>
+	<br>
+		<table class="table table-bordered table-hover" id="table">
+			<thead class="thead-dark">
+				<tr>
+					<th><strong>Description</strong></th>
+					<th><strong>Category</strong></th>
+					<th><strong>Part Number</strong></th>
+					<th><strong>DTPL Part Number</strong></th>
+					<th><strong>Store Stock</strong></th>
+					<!-- <th><strong>Line Stock</strong></th>÷ -->
+					<!-- <th><strong>Total Stock</strong></th> -->
+					<th><strong>Unit</strong></th>
+					<th style="display:none;"><strong>Supplier</strong></th>
+					<th><strong>Price</strong></th>
+					<!-- <th><strong>Value</strong></th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<% for(var i=0;i<raw_materials.length;i++){ %>
+						<span style="display:none;"><%= stock = raw_materials[i].stock + raw_materials[i].line_stock %></span>
+						<tr id="<%= i %>" class="<% if(stock <= 0.25 * raw_materials[i].monthly_requirement){ %>
+													less
+												<% } %>
+												<% if(stock >= raw_materials[i].monthly_requirement){ %>
+													more
+												<% } %>">
+							<td><%= raw_materials[i].name %></td>
+							<td><%= raw_materials[i].category %></td>
+							<td><%= raw_materials[i].code %></td>
+							<td><%= raw_materials[i].DTPL_code %></td>
+							<td><%= raw_materials[i].stock %></td>
+							<!-- <td><%= Math.round(raw_materials[i].line_stock*100)/100 %></td> -->
+							<!-- <td><%= Math.round(stock*100)/100 %></td> -->
+							<td><%= raw_materials[i].unit %></td>
+							<td style="display:none;"><%= raw_materials[i].supplier_code %></td>
+							<td><%= raw_materials[i].price %></td>
+							<!-- <td><%= Math.round(raw_materials[i].price * stock *100)/100 %></td> -->
+							<span style="display:none;"><%= totalPrice += Math.round(raw_materials[i].price * stock *100)/100 %><%= storePrice += Math.round(raw_materials[i].price * raw_materials[i].stock *100)/100 %><%= linePrice += Math.round(raw_materials[i].price * raw_materials[i].line_stock *100)/100 %></span>
+						</tr>
+				<% } %>
+			</tbody>
+		</table>
+	<a href="/inventory/new" class="btn btn-success" style="position:fixed;bottom:5px;">New</a>
+	<a href="/inventory/master" class="btn btn-dark float-right">Master</a>
+</div>
+<style type="text/css" media="screen">
+	.more{
+		color: blue;
+	}
+	.less{
+		color: red;
+	}
+</style>
+<script type="text/javascript">
+	new TableExport(document.getElementsByTagName("table"),{bootstrap:false,headers:true,formats:['csv','xls'],ignoreCols:[]});
+</script>
+<% include partials/footer.ejs %>

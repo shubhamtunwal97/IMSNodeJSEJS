@@ -1,0 +1,168 @@
+<html><head>
+		<style>
+			.btn {
+	  position: relative;
+	
+	  display: block;
+	  margin: 30px auto;
+	  padding: 0;
+	
+	  overflow: hidden;
+	
+	  border-width: 0;
+	  outline: none;
+	  border-radius: 2px;
+	  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+	  
+	  background-color: #2ecc71;
+	  color: #ecf0f1;
+	  
+	  transition: background-color .3s;
+	}
+	
+	.btn:hover, .btn:focus {
+	  background-color: #27ae60;
+	}
+	
+	.btn > * {
+	  position: relative;
+	}
+	
+	
+	.btn:before {
+	  content: "";
+	
+	  
+	  display: block;
+	  width: 0;
+	  padding-top: 0;
+		
+	  border-radius: 100%;
+	  
+	  background-color: rgba(236, 240, 241, .3);
+	  
+	  -webkit-transform: translate(-50%, -50%);
+	  -moz-transform: translate(-50%, -50%);
+	  -ms-transform: translate(-50%, -50%);
+	  -o-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+	
+	.btn:active:before {
+	  width: 120%;
+	  padding-top: 120%;
+	  
+	  transition: width .2s ease-out, padding-top .2s ease-out;
+	}
+	
+	/* Styles, not important */
+	*, *:before, *:after {
+	  box-sizing: border-box;
+	}
+	
+	html {
+	  position: relative;
+	  height: 100%;
+	}
+	
+	
+	h2 {
+	  font-weight: normal;
+	}
+	
+	.btn.orange {
+	  background-color: #e67e22;
+	}
+	
+	.btn.orange:hover, .btn.orange:focus {
+	  background-color: #d35400;
+	}
+	
+	.btn.red {
+	  background-color: #e74c3c;
+	}
+	
+	.btn.red:hover, .btn.red:focus {
+	  background-color: #c0392b;
+	}
+		</style>
+		<title>Inventory Management System</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/tableexport.css">
+		<link rel="stylesheet" type="text/css" href="/fonts/Righteous-Regular">
+		<link rel="stylesheet" type="text/css" href="/fonts/ShadowsIntoLight">
+		<link rel="stylesheet" type="text/css" href="/fonts/Merienda-Regular">
+		<link rel="stylesheet" type="text/css" href="/fonts/Merienda-Bold">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/css.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-combobox.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/jquery.ui.combify.css">
+		<script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script><script src="/javascript/FileSaver.js"></script>
+		<script src="/javascript/tableexport.js"></script>
+		<script src="/javascript/jquery.js"></script>
+		<script src="/javascript/jquery-ui.js"></script>
+		<script src="/javascript/jquery.table2excel.js"></script>
+		<script src="/javascript/xlsx.core.min.js"></script>	
+		<script type="text/javascript" src="/javascript/bootstrap-combobox.js"></script>
+		<script src="/javascript/jquery.ui.combify.js"></script>
+		<script src="/javascript/socket.io.js"></script>
+		<script src="/javascript/socket.io.slim.js"></script>
+		<script src="/javascript/bootstrap.js"></script>
+	</head>
+	<body style="">
+		<nav class="navbar navbar-light bg-light">
+			<div class="container-fluid">
+					<a href="/" class="btn">Home</a>
+					<a class="btn" href="/inventory" title="">Inventory</a>
+					<a class="btn" href="/supplier" title="">Supplier List</a>
+					<!-- <a class="nav-item nav-link btn btn-outline-primary btn-lg" href="/PO" title="">PO List</a> -->
+					<!-- <a class="nav-item nav-link btn btn-outline-primary btn-lg" href="/input" title="">Input</a> -->
+					<!-- <a class="nav-item nav-link btn btn-outline-primary btn-lg" href="/output" title="">Output</a> -->
+					<!-- <a class="nav-item nav-link btn btn-outline-primary btn-lg" href="/report" title="">Reports</a> -->
+					<a class="btn" href="/finished_good" title="">Finished Goods</a>
+					<!-- <a class="nav-item nav-link btn btn-outline-primary btn-lg" href="/finished_good/PD" title="">Production/Dispatch</a> -->
+				</div>
+		 </nav>
+	<br>
+	<h1 align="center">Edit Finished Good Detais</h1>
+	<div class="container">
+		<form action="/finished_good/484?_method=PUT" method="POST">
+		<div class="jumbotron">
+			<div class="row">
+				<div class="col-md-6">
+					<label>Description: <input type="text" name="finished_good[name]" class="form-control" value="Goods" required=""></label>
+				</div>
+				<div class="col-md-6">
+					<label>Part Number: <input type="text" name="finished_good[code]" class="form-control" required="" value="484"></label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<label>Customer: <input type="text" name="finished_good[customer]" value="XY" class="form-control" required=""></label>
+				</div>
+				<div class="col-md-4">
+				<label>Category: <select name="finished_good[category]" class="form-control">
+					<option value="Fuse Box" hidden="" selected="">Fuse Box</option>
+					<option value="Fuse Box">Fuse Box</option>
+					<option value="Indicator">Indicator</option>
+					<option value="Magneto">Magneto</option>
+					<option value="Battery Cable">Battery Cable</option>
+					<option value="Lead Wires">Lead Wires</option>
+					<option value="Piaggio">Piaggio</option>
+					<option value="Pigtail">Pigtail</option>
+					<option value="Spare Part (SPD)">Spare Part (SPD)</option>
+				</select></label>
+				</div>
+				<div class="col-md-4">
+					<label>Stock: <input type="number" min="0" name="finished_good[stock]" value="" class="form-control"></label>
+				</div>
+			</div>
+		</div>
+		
+		<button type="submit" class="btn btn-success">Update!!</button>
+		<form action="/finished_good/484?_method=DELETE" method="POST">
+		</form>
+	</div>
+	
+	
+	</body></html>

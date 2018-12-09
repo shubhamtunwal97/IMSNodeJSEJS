@@ -1,0 +1,35 @@
+<% include partials/header.ejs %>
+<br>
+<h1 align="center">Reports</h1>
+<div class="container jumbotron">
+	<form action="/report" method="post">
+		<fieldset>
+			<legend>Select Type Of Report</legend>
+			<div class="row">
+				<div class="col-md-3">
+					<select name="by" class="form-control">
+						<option value="" hidden selected>Select an option</option>
+						<optgroup label="Raw Material">
+							<option value="Name">By Description</option>
+							<option value="PO">By PO Number</option>
+							<option value="input">Input</option>
+							<option value="output">Output</option>
+							<option value="less">Shortage</option>
+							<option value="more">Excess</option>
+						</optgroup>
+						<optgroup label="Finished Goods">
+							<option value="Production">Production</option>
+							<option value="Dispatch">Dispatch</option>
+							<option value="Date">By Date</option>
+							<option value="FGName">By Description</option>
+						</optgroup>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-success">Submit!!</button>
+			</div>
+		</fieldset>
+	</form>
+</div>
+
+
+<% include partials/footer.ejs %>

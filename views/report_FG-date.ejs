@@ -1,0 +1,32 @@
+<% include partials/header.ejs %>
+<br><br>
+<h1 align="center">Report for Finished Goods</h1>
+<br>
+<form class="" action="/report/date" method="post">
+  <div class="container jumbotron">
+    <legend>Date Range</legend>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="from">From: </label>
+        <input type="date" name="from" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label for="to">To: </label>
+        <input type="date" name="to" class="form-control">
+      </div>
+    </div>
+    <br><br>
+    <div class="row">
+      <div class="col-md-6">
+        <legend>Type</legend>
+        <label for="production" class="radio">Production
+        <input type="radio" name="type" value="production"></label>
+        <label for="dis" class="radio">Dispatch
+        <input type="radio" name="type" value="dispatch"></label>
+      </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-success">Submit!</button>
+  </div>
+</form>
+<% include partials/footer.ejs %>

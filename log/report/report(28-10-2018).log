@@ -1,0 +1,1 @@
+{"message":{"error":{"fatal":true,"code":"PROTOCOL_CONNECTION_LOST"},"where":"POST /report/input SELECT i.*,r.code FROM input AS i INNER JOIN raw_material AS r ON r.name = i.raw_desc ORDER BY date DESC","time":"2018-10-28T11:14:39.953Z"},"level":"error"}

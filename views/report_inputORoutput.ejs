@@ -1,0 +1,92 @@
+<% include partials/header.ejs %>
+<br>
+<h1 align="center">Report for <%= type %></h1>
+<br>
+<div class="container-fluid">
+	<table class="table table-striped table-bordered table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<% if(type === "input"){ %>
+					<th>#</th>
+					<th>PO Number</th>
+					<th>Invoice No</th>
+					<th>Part Number</th>
+					<th>DTPL Part Number</th>
+					<th>Description</th>
+					<th>Quantity</th>
+					<th>Date</th>
+					<% }else { %>
+					<th>#</th>
+					<th>Slip Number</th>
+					<th>Part Number</th>
+					<th>Quantity</th>
+					<th>Date</th>
+					<% } %>
+				</tr>
+			</thead>
+			<tbody>
+				<% if(type === "input"){ %>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>From: <%= from.toISOString().substring(0,10) %></td>
+					</tr>
+					<% for(var i=0;i<i_o.length;i++){ %>
+					<tr>
+						<td><%= i+1 %></td>
+						<td><%= i_o[i].PO_code %></td>
+						<td><%= i_o[i].invoice_no %></td>
+						<td><%= i_o[i].code %></td>
+						<td><%= i_o[i].DTPL_code %></td>
+						<td><%= i_o[i].raw_desc %></td>
+						<td><%= i_o[i].quantity %></td>
+						<td><%= i_o[i].date.toISOString().substring(0,10) %></td>
+					</tr>
+					<% } %>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>To: <%= to.toISOString().substring(0,10) %></td>
+					</tr>
+				<% } else { %>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>From: <%= from.toISOString().substring(0,10) %></td>
+					</tr>
+					<% for(var i=0;i<i_o.length;i++){ %>
+					<tr>
+						<td><%= i+1 %></td>
+						<td><%= i_o[i].slip_no %></td>
+						<td><%= i_o[i].raw_material_code %></td>
+						<td><%= i_o[i].quantity %></td>
+						<td><%= i_o[i].date.toISOString().substring(0,10) %></td>
+					</tr>
+					<% } %>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>To: <%= to.toISOString().substring(0,10) %></td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+</div>
+<script type="text/javascript">
+	new TableExport(document.getElementsByTagName("table"),{bootstrap:false,headers:true,formats:['csv','xls','xlsx'],ignoreCols:[]});
+</script>
+<% include partials/footer.ejs %>

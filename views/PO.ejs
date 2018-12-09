@@ -1,0 +1,38 @@
+<% include partials/header.ejs %>
+<br>
+<div class="container">
+	<h1 align="center">PO List</h1>
+	<br>
+	<table class="table table-striped table-bordered table-hover">
+		<thead class="thead-dark">
+			<tr>
+				<th><strong>PO No.</strong></th>
+				<th><strong>Supplier Code</strong></th>
+				<th><strong>Date</strong> (dd/mm/yyyy)</th>
+				<th><strong>Status</strong></th>
+				<th>#</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(var i=POs.length-1;i>=0;i--){ %>
+					<tr>
+						<td><%=POs[i].code%></td>
+						<td><%= POs[i].supplier_code %></td>
+						<td><%= POs[i].date.getDate() %>/<%= POs[i].date.getMonth() %>/<%= POs[i].date.getFullYear() %></td>
+						<td class="<% if(POs[i].pending === 'Closed'){ %>closed <% } else { %>open<% } %>"><%= POs[i].pending %></td>
+						<td><a class="btn btn-primary" href="/PO/<%= POs[i].code %>">Update</a></td>
+					</tr>
+			<% } %>
+		</tbody>
+	</table>
+	<a href="/PO/new" class="btn btn-success">New</a>
+</div>
+<style type="text/css" media="screen">
+	.closed{
+		color: red;
+	}
+	.open{
+		color: green;
+	}
+</style>
+<% include partials/footer.ejs %>

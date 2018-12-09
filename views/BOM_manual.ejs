@@ -1,0 +1,66 @@
+<% include partials/header.ejs %>
+<br>
+<h1 align="center">Raw Material Requirements</h1>
+<div class="container-fluid">
+	<form action="/PO/export<% if(mock) {%>/mock<% } %>" method="post">
+		<table class="table table-striped table-bordered table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th>#</th>
+					<th>Description</th>
+					<th>Part Number</th>
+					<th>DTPL Part Number</th>
+					<th>Category</th>
+					<th>Supplier</th>
+					<th>Stock</th>
+					<th>Requirement</th>
+					<th>Net Requirement</th>
+					<th>Unit</th>
+					<th>PO Number</th>
+				</tr>
+			</thead>
+			<tbody>
+				<input type="hidden" value="<%= raw_materials.length %>" id="raw_materials.length">
+				<% for(var i=0;i<raw_materials.length;i++){ %>
+					<tr>
+						<td><%= i+1 %></td>
+						<td><%= raw_materials[i].name %><input type="hidden" name="raw_name[<%=i%>]" value="<%=raw_materials[i].name%>"></td>
+						<td><%= raw_materials[i].code %></td><input type="hidden" name="raw_code[<%=i%>]" value="<%=raw_materials[i].code%>">
+						<td><%= raw_materials[i].DTPL_code %><input type="hidden" name="DTPL_code[<%=i%>]" value="<%=raw_materials[i].DTPL_code%>"></td>
+						<td><%= raw_materials[i].category %></td><input type="hidden" name="raw_category[<%=i%>]" value="<%=raw_materials[i].category%>">
+						<td><%= raw_materials[i].supplier_code %><input type="hidden" name="supplier[<%=i%>]" value="<%= raw_materials[i].supplier_code %>"></td>
+						<td><%= raw_materials[i].stock %><input type="hidden" name="stock[<%=i%>]" value="<%= raw_materials[i].stock %>"></td>
+						<td><% if(!mock) { %><%= raw_materials[i].monthly_requirement %> <% } else { %><%= raw_quantity[raw_materials[i].code] %> <% } %></td>
+						<% if(!mock) { %><input type="hidden" value="<%= w = Math.round((1.25*raw_materials[i].monthly_requirement - raw_materials[i].stock - raw_materials[i].line_stock)/10)*10 %>"><% } else { %> ><input type="hidden" value="<%= w = Math.round((raw_quantity[raw_materials[i].code]/10))*10 %>"> <% } %>
+						<td class="quantity"><input type="number" name="quantity[<%= i %>]" value="<%= w %>" id="quantity<%= i %>"><span id="span<%=i%>" style="display:none;"></span></td>
+						<td><%= raw_materials[i].unit %></td><input type="hidden" name="raw_unit[<%=i%>]" value="<%=raw_materials[i].unit%>">
+						<td class="PO"><input type="text" name="PO[<%= i %>]" id="PO<%= i %>"><span id="<%=i%>" style="display:none;"></span></td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+		<button type="submit" class="btn btn-success">Export</button>
+	</form>
+</div>
+<script type="text/javascript">
+	var length = document.getElementById("raw_materials.length").value;
+	for(var i=0;i<length;i++){
+		var span = document.getElementById("span"+i);
+		span.innerHTML = document.getElementById("quantity"+i).value;
+		span = document.getElementById(i);
+		span.innerHTML = document.getElementById("PO"+i).value;
+	}
+	$("table").on("change",'.quantity input',function(e){
+		for(var i=0;i<length;i++){
+			var span = document.getElementById("span"+i);
+			span.innerHTML = document.getElementById("quantity"+i).value;
+		}
+	});
+	$("table").on("change",'.PO input',function(e){
+		for(var i=0;i<length;i++){
+			var span = document.getElementById(i);
+			span.innerHTML = document.getElementById("PO"+i).value;
+		}
+	});
+</script>
+<% include partials/footer.ejs %>

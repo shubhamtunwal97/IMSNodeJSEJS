@@ -1,0 +1,28 @@
+<% include partials/header.ejs %>
+<br>
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Part Number</th>
+			<th>Desc</th>
+			<th>Stock</th>
+			<th>Opening</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% for(var i=0;i<raw_materials.length;i++){ %>
+		<tr>
+			<td><%= i+1 %></td>
+			<td><%= raw_materials[i].code %></td>
+			<td><%= raw_materials[i].name %></td>
+			<td><%= raw_materials[i].stock %></td>
+			<td><%= raw_materials[i].stock + raw_materials[i].q - raw_materials[i].qu %></td>
+		</tr>
+	<% } %>
+	</tbody>
+</table>
+<script>
+   new TableExport(document.getElementsByTagName("table"),{bootstrap:false,headers:true,formats:['csv','xls'],ignoreCols:[]});
+</script>
+<% include partials/footer.ejs %>

@@ -1,0 +1,29 @@
+<% include ./partials/header.ejs %>
+<br><br>
+<h1 align="center">Output</h1><br><br>
+<div class="container">
+  <table class="table table-stripped table-bordered">
+    <thead class="thead-dark">
+      <th>Slip Number</th>
+      <th>Raw Material Code</th>
+      <th>Quantity</th>
+      <th>#</th>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<raw_materials.length;i++){ %>
+        <tr>
+          <form action="/output/<%= raw_materials[i].slip_no %>/<%= raw_materials[i].raw_material_code %>?_method=DELETE" method="POST" onsubmit="return confirm('Do you want to submit?');">
+            <td><%= raw_materials[i].slip_no %></td>
+            <td><%= raw_materials[i].raw_material_code %></td>
+            <td><%= raw_materials[i].quantity %></td>
+            <td><button type="submit" class="btn btn-danger">Delete</button></td>
+          </form>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <form action="/output/<%= raw_materials[0].slip_no %>?_method=DELETE" method="POST" onsubmit="return confirm('Do you want to submit?');">
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+</div>
+<% include ./partials/footer.ejs %>

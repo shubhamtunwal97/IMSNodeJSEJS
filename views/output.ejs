@@ -1,0 +1,124 @@
+<% include partials/header.ejs %>
+<br>
+<div class="container">
+	<h1 align="center">Raw Material Outward</h1>
+	<br>
+	<div id="alert-div" role="alert">
+
+	</div>
+	<form action="/output" method="post" class="form" id="form" onsubmit="return confirm('Do you want to submit?');">
+		<div class="row">
+			<div class="col-md-6">
+				<label>Slip Number: <input type="text" name="slip_no" required id="slip_no" class="form-control" id='slip'></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label for="product" >Raw Material Name: </label>
+					<input type="text" name="product" id="product" list="Product" class="form-control">
+						<datalist id="Product">
+						<% for(var i=0;i<raw_materials.length;i++){ %>
+								<option value="<%= raw_materials[i].name %>,<%= raw_materials[i].code %>"><%= raw_materials[i].name %>/<%= raw_materials[i].code %></option>
+						<% } %>
+						</datalist>
+			</div>
+			<div class="col-md-4">
+				<label>Quantity: <input type="number" name="quantity" id="quantity" class="form-control"></label>
+			</div>
+			<div class="col-md-2">
+				<label>Stock: <input type="text" class="form-control-plaintext" id="stock" readonly></label>
+			</div>
+		</div>
+		<div class="row">
+			<button type="button" onclick="func()" class="btn btn-dark">Add</button>
+		</div>
+		<table class="table table-striped table-bordered table-hover">
+				<tr class="thead-dark">
+					<th>Slip Number</th>
+					<th>Raw Material Name</th>
+					<th>Raw Material Code</th>
+					<th>Quantity</th>
+					<th>#</th>
+				</tr>
+		</table>
+		<button type="submit" class="btn btn-success">Submit!</button>
+	</form>
+</div>
+<script type="text/javascript">
+	function but_func(i){
+		document.querySelector("table").deleteRow(i);
+	}
+	var i = 0;
+	var socket = io();
+	let stock;
+	$("#product").on("change", async (e) => {
+		let p = e.target.value.split(",")[0];
+		socket.emit("check-stock",p);
+		await socket.on("return-check-stock", s => {
+			stock = s;
+			$("#stock").val(stock);
+		});
+	});
+
+	function func () {
+		var slip_no = document.getElementById("slip_no").value;
+		var productInfo = document.getElementById("form").elements[1].value;
+		var product = productInfo.split(",");
+		var product_name = product[0];
+		var product_code = product[1];
+		var quantity = document.getElementById("quantity").value;
+
+		// socket.emit("check-stock",product_name);
+		// socket.on("return-check-stock", stock => {
+			var q = $("#quantity").val();
+			if(q > stock){
+				$("#alert-div").html(`<div class='alert alert-danger' id='alert'>Quantity is greater than the stock cannot output!</div>`);
+				setTimeout(_ => {
+					$("#alert").remove();
+				} ,10000);
+			} else {
+
+				if(document.getElementById("form").elements[1].value){
+					var slip_no = document.getElementById("slip_no").value;
+					var productInfo = document.getElementById("form").elements[1].value;
+					var product = productInfo.split(",");
+					var product_name = product[0];
+					var product_code = product[1];
+					var quantity = document.getElementById("quantity").value;
+
+					var table = document.querySelector("table");
+					var row = table.insertRow(-1);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					var cell5 = row.insertCell(4);
+
+					cell1.innerHTML = slip_no + '<input type="hidden" name="slip_no[' + i + ']" value="' + slip_no + '">';
+					cell2.innerHTML = product_name + '<input type="hidden" name="product_name[' + i + ']" value="' + product_name + '">';
+					cell3.innerHTML = product_code + '<input type="hidden" name="product_code[' + i + ']" value="' + product_code + '">';
+					cell4.innerHTML = quantity + '<input type="hidden" name="Quantity[' + i + ']" value="' + quantity + '">';
+					cell5.innerHTML = '<button type="button" class="btn btn-danger" onclick="but_func('+row.rowIndex+')">Delete</button>'
+
+					i++;
+					document.getElementById("product").value = null;
+					document.getElementById("quantity").value = null;
+				}
+			}
+		// });
+		}
+</script>
+<script>
+	var socket = io();
+	$('#slip_no').change(function(){
+		socket.emit('slip_no',$('#slip_no').val());
+		socket.on('return_slip',function(val){
+			if(val === true){
+				$("#alert-div").html(`<div class='alert alert-danger' id='alert'>Slip already exists.</div>`);
+			} else {
+				$("#alert").remove();
+			}
+		});
+	});
+</script>
+<% include partials/footer.ejs %>

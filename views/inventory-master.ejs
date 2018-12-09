@@ -1,0 +1,40 @@
+<% include ./partials/header.ejs %>
+<br><br>
+<div class="container-fluid">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <th>code</th>
+      <th>DTPL_code</th>
+      <th>name</th>
+      <th>category</th>
+      <th>unit</th>
+      <th>price</th>
+      <th>supplier_code</th>
+      <th>stock</th>
+      <th>line_stock</th>
+      <th>monthly_requirement</th>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<raw_materials.length;i++){ %>
+        <tr>
+          <td><%= raw_materials[i].code %></td>
+          <td><%= raw_materials[i].DTPL_code %></td>
+          <td><%= raw_materials[i].name %></td>
+          <td><%= raw_materials[i].category %></td>
+          <td><%= raw_materials[i].unit %></td>
+          <td><%= raw_materials[i].price %></td>
+          <td><%= raw_materials[i].supplier_code %></td>
+          <td><%= raw_materials[i].stock %></td>
+          <td><%= raw_materials[i].line_stock %></td>
+          <td><%= raw_materials[i].monthly_requirement %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+	new TableExport(document.getElementsByTagName("table"),{bootstrap:false,headers:true,formats:['csv','xls'],ignoreCols:[]});
+</script>
+
+<% include ./partials/footer.ejs %>

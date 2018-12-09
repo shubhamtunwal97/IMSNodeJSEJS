@@ -1,0 +1,36 @@
+<% include partials/header.ejs %>
+<head>
+	<style>
+		
+	</style>
+</head>
+<br>
+<h1 align="center">Supplier Detail</h1>
+<br>
+<div class="container">
+	<table class="table table-striped table-bordered table-hover">
+		<thead class="thead-dark">
+			<tr>
+				<th><strong>Name</strong></th>
+				<th><strong>Code</strong></th>
+				<th><strong>Address</strong></th>
+				<th><strong>GST No.</strong></th>
+				<th>#</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(var i=0;i<suppliers.length;i++){ %>
+					<tr>
+						<td><%= suppliers[i].name %></td>
+						<td><%= suppliers[i].code %></td>
+						<td><%= suppliers[i].address1 %></td>
+						<td><%= suppliers[i].GST_no %></td>
+						<td><a class="btn btn-primary" href="/supplier/<%= suppliers[i].code %>">Update</a></td>
+					</tr>
+			<% } %>
+		</tbody>
+	</table>
+	<a href="/supplier/new" class="btn btn-success">New</a>
+</div>
+
+<% include partials/footer.ejs %>

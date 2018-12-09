@@ -1,0 +1,19 @@
+<% include partials/header.ejs %>
+
+<h1 align="center">Report</h1>
+
+<div class="container jumbotron">
+	<form action="/report/<%= type %>" method="post">
+		<div class="row">
+			<div class="col-md-6">
+				<label>From: <input type="date" name="from"></label>
+			</div>
+			<div class="col-md-6">
+				<label>To: <input type="date" name="to"></label>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success">Submit</button>
+	</form>
+</div>
+
+<% include partials/footer.ejs %>

@@ -1,0 +1,7 @@
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /output SELECT * FROM raw_material","time":"2018-10-28T10:36:19.860Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /output SELECT * FROM raw_material","time":"2018-10-28T10:42:08.911Z"},"level":"error"}
+{"message":{"error":{"fatal":true,"code":"PROTOCOL_CONNECTION_LOST"},"where":"GET /output SELECT * FROM raw_material","time":"2018-10-28T11:14:39.952Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /output SELECT * FROM raw_material","time":"2018-10-28T11:20:42.117Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /output SELECT * FROM raw_material","time":"2018-10-28T12:34:15.770Z"},"level":"error"}
+{"message":{"error":{"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":3306,"fatal":true},"where":"GET /output SELECT * FROM raw_material","time":"2018-10-28T12:36:31.834Z"},"level":"error"}
+{"message":{"error":{"code":"EADDRNOTAVAIL","errno":"EADDRNOTAVAIL","syscall":"connect","address":"127.0.0.1","fatal":true},"where":"GET /output SELECT * FROM raw_material","time":"2018-10-28T12:40:25.441Z"},"level":"error"}

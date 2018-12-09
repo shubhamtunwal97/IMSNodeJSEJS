@@ -1,0 +1,47 @@
+<% include partials/header.ejs %>
+
+	<div class="container jumbotron">
+		<form action="/PO/<%= foundRaw[0].PO_code %>?_method=PUT" method="POST" class="form" onsubmit="return confirm('Are you sure you want to update this PO?');">
+			<div class="row container form-group">
+				<div class="col-md-4">
+					<label for="PO_no">PO Number</label>
+					<input type="text" name="PO_no" value="<%= foundRaw[0].PO_code %>" readonly class="form-control-plaintext" id="PO_no" class="form-control">
+				</div>
+				<div class="col-md-4">
+					<label for="date">Date</label>
+					<input type="date" name="PO_date" required id="date" class="form-control" value="<%= foundRaw[0].date.toISOString().substring(0,10) %>">
+				</div>
+			</div>
+			<br>
+			<% for(var j=0;j<foundRaw.length;j++){ %>
+				<div class="row">
+					<div class="col-md-6">
+						<label for="product_name">Description/DTPL Part Number</label>
+						<input type="text" name="PO_code[<%= j %>]" list="Product" value="<%= foundRaw[j].raw_desc %>$<%= foundRaw[j].DTPL_code %>" id="product_name" class="form-control">
+							<datalist id="Product" name="Product">
+							<% for(var i=0;i<raw_materials.length;i++){ %>
+									<option value="<%= raw_materials[i].name %>$<%= raw_materials[i].DTPL_code %>"><%= raw_materials[i].code %>/<%= raw_materials[i].DTPL_code %>/<%= raw_materials[i].name %></option>
+							<% } %>
+							</datalist>
+					</div>
+					<div class="col-md-4">
+						<label for="quantity">PO Quantity</label>
+						<input type="number" name="PO_quantity[<%= j %>]" value="<%= foundRaw[j].initial_quantity %>" id="quantity" class="form-control">
+					</div>
+					<div class="col-md-2">
+						<a href="/PO/<%= foundRaw[0].PO_code %>/<%= foundRaw[j].raw_desc %>/delete" title="">Delete</a>
+					</div>
+				</div>
+			<% } %>
+			<br>
+			<button type="submit" class="btn btn-success">Update</button>
+			<a href="/PO/<%= foundRaw[0].PO_code %>/new" class="btn btn-dark">Add New Raw Material</a>
+			<a href="/PO/<%= foundRaw[0].PO_code %>/close" class="btn btn-danger" style="float:right">Close this PO</a>
+		</form>
+		<br><br><br>
+		<form action="/PO/<%= foundRaw[0].PO_code %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you wan to delete this PO?');">
+			<button type="submit" class="btn btn-danger">Delete PO</button>
+		</form>
+	</div>
+
+<% include partials/footer.ejs %>

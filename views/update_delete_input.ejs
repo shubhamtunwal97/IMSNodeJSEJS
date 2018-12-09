@@ -1,0 +1,33 @@
+<% include ./partials/header.ejs %>
+<br><br>
+<h1 align="center">Input</h1><br><br>
+<div class="container">
+  <table class="table table-bordered table-stripped">
+    <thead class="thead-dark">
+      <th>Invoice Number</th>
+      <th>PO Code</th>
+      <th>Description</th>
+      <th>DTPL Code</th>
+      <th>Quantity</th>
+      <th>#</th>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<raw_materials.length;i++){ %>
+        <tr>
+          <form action="/input/<%= raw_materials[i].invoice_no %>/<%= raw_materials[i].raw_desc %>?_method=DELETE" method="POST" onsubmit="return confirm('Do you want to submit?');">
+            <td><%= raw_materials[i].invoice_no %></td>
+            <td><%= raw_materials[i].PO_code %></td>
+            <td><%= raw_materials[i].raw_desc %></td>
+            <td><%= raw_materials[i].DTPL_code %></td>
+            <td><%= raw_materials[i].quantity %></td>
+            <td><button type="submit" class="btn btn-danger">Delete</button></td>
+          </form>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <form action="/input/<%= raw_materials[0].invoice_no %>?_method=DELETE" method="POST" onsubmit="return confirm('Do you want to submit?');">
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+</div>
+<% include ./partials/footer.ejs %>

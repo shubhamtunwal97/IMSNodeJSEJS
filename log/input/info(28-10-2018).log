@@ -1,0 +1,4 @@
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /input SELECT * FROM PO","time":"2018-10-28T10:42:09.710Z"},"level":"error"}
+{"message":{"error":{"fatal":true,"code":"PROTOCOL_CONNECTION_LOST"},"where":"GET /input SELECT * FROM PO","time":"2018-10-28T11:14:39.951Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /input SELECT * FROM PO","time":"2018-10-28T11:20:41.469Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /input SELECT * FROM PO","time":"2018-10-28T12:34:15.061Z"},"level":"error"}

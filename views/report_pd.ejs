@@ -1,0 +1,128 @@
+<% include partials/header.ejs %>
+<br><br>
+<h1 align="center">Report for finished goods</h1>
+<div class="container">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-6">
+        <label for="finished_good[name]">Description</label>
+        <input type="text" name="finished_good[name]" value="<%= finished_good.name %>" class="form-control-plaintext">
+      </div>
+      <div class="col-md-6">
+        <label for="finished_good[code]">Part Number</label>
+        <input type="text" name="finished_good[code]" value="<%= finished_good.code %>" class="form-control-plaintext">
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <label for="finished_good[stock]">Current Stock</label>
+        <input type="text" name="finished_good[stock]" value="<%= finished_good.stock %>" class="form-control-plaintext">
+      </div>
+      <div class="col-md-4">
+        <label for="finished_good[quantity]">Current Schedule</label>
+        <input type="text" name="finished_good[quantity]" value="<%= finished_good.quantity %>" class="form-control-plaintext">
+      </div>
+      <div class="col-md-4">
+        <label for="production">Total Exchange</label>
+        <input type="text" name="production" value="<%= totalExchange %>" class="form-control-plaintext">
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <% if(t !== 'FGName'){ %>
+      <th>#</th>
+      <th>Quantity</th>
+      <th>Date</th>
+    <% } else { %>
+      <th>#</th>
+      <th>Production Quantity</th>
+      <th>Dispatch Quantity</th>
+      <th>Date</th>
+      <th>Stock</th>
+    <% } %>
+    </thead>
+    <tbody>
+      <% if(t !== 'FGName'){ %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>From: <%= from %></td>
+        </tr>
+        <% if(t === 'production') { %>
+          <% for(var i=0;i<finished_goods.length;i++){ %>
+            <span style="display:none;"><%= openingStock += finished_goods[i].quantity %></span>
+            <tr>
+              <td><%= i+1 %></td>
+              <td><%= finished_goods[i].quantity %></td>
+              <td><%= finished_goods[i].date %></td>
+            </tr>
+          <% } %>
+        <% } else { %>
+          <% for(var i=0;i<finished_goods.length;i++){ %>
+            <span style="display:none;"><%= openingStock -= finished_goods[i].quantity %></span>
+            <tr>
+              <td><%= i+1 %></td>
+              <td><%= finished_goods[i].quantity %></td>
+              <td><%= finished_goods[i].date %></td>
+            </tr>
+          <% } %>
+        <% } %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>To: <%= to %></td>
+        </tr>
+      <% } else { %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>From: <%= from %></td>
+          <td>Opening Stock: <%= openingStock %></td>
+        </tr>
+          <% for(var i=0;i<finished_goods.length;i++){ %>
+            <span style="display:none;">
+              <% if(finished_goods[i].type === 'p') { %>
+                <%= openingStock += finished_goods[i].quantity %>
+                <%= productionQuantity += finished_goods[i].quantity %>
+              <% } else { %>
+                <%= openingStock -= finished_goods[i].quantity %>
+                <%= dispatchQuantity += finished_goods[i].quantity %>
+              <% } %>
+            </span>
+            <% if(finished_goods[i].type === 'p') { %>
+              <tr>
+                <td><%= i+1 %></td>
+                <td><%= finished_goods[i].quantity %></td>
+                <td></td>
+                <td><%= finished_goods[i].date %></td>
+                <td><%= openingStock %></td>
+              </tr>
+            <% } else { %>
+              <tr>
+              <td><%= i+1 %></td>
+                <td></td>
+                <td><%= finished_goods[i].quantity %></td>
+                <td><%= finished_goods[i].date %></td>
+                <td><%= openingStock %></td>
+              </tr>
+            <% } %>
+          <% } %>
+        <tr>
+          <td></td>
+          <td>Total: <%= productionQuantity %></td>
+          <td>Total: <%= dispatchQuantity %></td>
+          <td>To: <%= to %></td>
+          <td>Closing Stock: <%= closingStock %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+<script type="text/javascript">
+	new TableExport(document.getElementsByTagName("table"),{bootstrap:false,headers:true,formats:['csv','xls','xlsx'],ignoreCols:[0]});
+</script>
+<% include partials/footer.ejs %>

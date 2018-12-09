@@ -1,0 +1,62 @@
+<% include partials/header.ejs %>
+<br>
+<h1 align="center">Edit Finished Goods Schedule</h1>
+<br>
+<div class="container jumbotron">
+	<% if(!mock) { %>
+		<form action="/BOM" method="post">
+	<% } else { %>
+		<form action="/finished_good/mock" method="post">
+	<% } %>
+		<br>
+		<table class="table table-striped table-bordered table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th>#</th>
+					<th>Description</th>
+					<th>Part Number</th>
+					<th>Category</th>
+					<th>Quantity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<input type="hidden" value="<%= finishedGoods.length %>" id="length">
+				<% for(var i=0;i<finishedGoods.length;i++){ %>
+					<tr>
+						<td><%= i+1 %></td>
+						<td><%= finishedGoods[i].name %></td>
+						<td><%= finishedGoods[i].code %> <input type="hidden" name="finished_code[<%= i %>]" value="<%= finishedGoods[i].code %>"> </td>
+						<td><%= finishedGoods[i].category %></td>
+						<% if(!mock) { %><td class="quantity"><input type="number" name="quantity[<%= i %>]" value="<%= finishedGoods[i].quantity %>" id="quantity<%= i %>"></td> <% } else { %> <td class="quantity"><input type="number" name="quantity[<%= i %>]" value="0" id="quantity<%= i %>"></td> <% } %>
+					</tr>
+				<% } %>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>Total: </td>
+					<td id="total"></td>
+				</tr>
+			</tbody>
+		</table>
+		<button type="submit" class="btn btn-success" style="position:fixed;bottom:5px;">Submit!</button>
+	</form>
+</div>
+<script>
+	var length = document.getElementById("length").value;
+	var total = 0;
+	for(var i=0;i<length;i++){
+		total += parseInt(document.getElementById("quantity"+i).value);
+	}
+	var Total = document.getElementById("total");
+	Total.innerHTML = total;
+	$("table").on("change",".quantity input",function(e){
+		var total = 0;
+		for(var i=0;i<length;i++){
+			total += parseInt(document.getElementById("quantity"+i).value);
+		}
+		var Total = document.getElementById("total");
+		Total.innerHTML = total;
+	});
+</script>
+<% include partials/footer.ejs %>

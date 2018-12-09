@@ -1,0 +1,109 @@
+<% include partials/header.ejs %>
+
+<div class="container">
+	<form action="/input/update" method="post" class="form" id="form"  onsubmit="return confirm('Do you want to submit?');">
+		<div class="form-row">
+			<div class="col-md-6">
+				<label for="PO[code]">PO Number</label>
+				<input type="text" name="PO_code" value="<%= raw_materials[0].PO_code %>" readonly class="form-control-plaintext" id="PO[code]">
+			</div>
+			<div class="col-md-6">
+				<label for="invoice">Invoice No</label>
+				<input type="text" name="invoice" class="form-control" id="invoice">
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="col-md-6">
+				<label for="rawMaterialCode">Description</label>
+				<select name="rawMaterialCode" class="form-control select" id="rawMaterialCode">
+					<option value="" hidden selected></option>
+						<% for(var i=0;i<raw_materials.length;i++){ %>
+							<option value="<%= raw_materials[i].raw_desc %>$<%= raw_materials[i].DTPL_code %>"><%= raw_materials[i].DTPL_code 	%>$$<%= raw_materials[i].raw_desc %></option>
+						<% } %>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<label for="remainingQuantity">Remaining Quantity:</label>
+				<select name="remainingQuantity" id="remainingQuantity" class="form-control-plaintext" readonly>
+					<option value="" hidden selected></option>
+					<% for(var i=0;i<raw_materials.length;i++){ %>
+						<option value="<%= raw_materials[i].quantity %>"><%= raw_materials[i].quantity %></option>
+					<% } %>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<label>Price: <select id="price" class="form-control-plaintext">
+					<option value=""></option>
+					<% for(var i=0;i<raw_materials.length;i++) { %>
+						<option value="<%= raw_materials[i].price %>"><%= raw_materials[i].price %></option>
+					<% } %>
+				</select></label>
+			</div>
+		</div>
+		<div class="row col-md-6">
+			<label for="quantit">Quantity</label>
+			<input type="number" name="quantit" class="form-control" id="quantity">
+			<button type="button" onclick="func()" class="btn btn-dark">Add</button>
+		</div>
+
+		<table class="table table-striped table-bordered table-hover">
+			<thead class="thead-dark">
+				<th>#</th>
+				<th>PO Number</th>
+				<th>Invoice Number</th>
+				<th>Description</th>
+				<th>DTPL Part Number</th>
+				<th>Quantity</th>
+				<th>#</th>
+			</thead>
+		</table>
+		<input type="submit" class="btn btn-primary">
+</form>
+</div>
+<script type="text/javascript">
+	$('#rawMaterialCode').combobox();
+	$("#rawMaterialCode").on("change",function(){
+		var index = this.selectedIndex;
+		$('#remainingQuantity option').eq(index).prop('selected',true);
+		$('#price option').eq(index).prop('selected',true);
+	});
+	function but_func(i){
+			document.querySelector("table").deleteRow(i);
+	}
+	var i = 0;
+	function func () {
+		if(document.getElementById("form").elements[2].value){
+			var table = document.querySelector("table");
+			var row = table.insertRow(-1);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
+			var cell5 = row.insertCell(4);
+			var cell6 = row.insertCell(5);
+			var cell7 = row.insertCell(6);
+			var PO_no = document.getElementById("PO[code]").value;
+			var Invoice_no = document.getElementById("invoice").value;
+			var productInfo = document.getElementById("form").elements[2].value;
+			var product = productInfo.split("$");
+			var product_name = product[0];
+			var product_code = product[1];
+			var quantity = document.getElementById("quantity").value;
+
+			cell1.innerHTML = i+1;
+			cell2.innerHTML = PO_no;
+			cell3.innerHTML = Invoice_no + '<input type="hidden" name="invoice_no[' + i + ']" value="' + Invoice_no + '">';
+			cell4.innerHTML = product_name + '<input type="hidden" name="raw_desc[' + i + ']" value="' + product_name + '">';
+			cell5.innerHTML = product_code + '<input type="hidden" name="DTPL_code[' + i + ']" value="' + product_code + '">';
+			cell6.innerHTML = quantity + '<input type="hidden" name="Quantity[' + i + ']" value="' + quantity + '">';
+			cell7.innerHTML = '<button type="button" class="btn btn-danger" onclick="but_func('+row.rowIndex+')">Delete</button>'
+
+			i++;
+			$('#rawMaterialCode option').eq(-1).prop('selected',true);
+			document.getElementById("quantity").value = null;
+			$('#remainingQuantity option').eq(0).prop('selected',true);
+			$('#price option').eq(0).prop('selected',true);
+		}
+	}
+</script>
+<% include partials/footer.ejs %>

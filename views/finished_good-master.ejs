@@ -1,0 +1,32 @@
+<% include ./partials/header.ejs %>
+<br><br>
+<div class="container-fluid">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <th>code</th>
+      <th>name</th>
+      <th>category</th>
+      <th>customer</th>
+      <th>stock</th>
+      <th>quantity</th>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<finished_goods.length;i++){ %>
+        <tr>
+          <td><%= finished_goods[i].code %></td>
+          <td><%= finished_goods[i].name %></td>
+          <td><%= finished_goods[i].category %></td>
+          <td><%= finished_goods[i].customer %></td>
+          <td><%= finished_goods[i].stock %></td>
+          <td><%= finished_goods[i].quantity %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+	new TableExport(document.getElementsByTagName("table"),{bootstrap:false,headers:true,formats:['csv','xls'],ignoreCols:[]});
+</script>
+
+<% include ./partials/footer.ejs %>

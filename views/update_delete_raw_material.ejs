@@ -1,0 +1,236 @@
+<html><head>
+		<style>
+			.btn {
+	  position: relative;
+	
+	  display: block;
+	  margin: 30px auto;
+	  padding: 0;
+	
+	  overflow: hidden;
+	
+	  border-width: 0;
+	  outline: none;
+	  border-radius: 2px;
+	  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+	  
+	  background-color: #2ecc71;
+	  color: #ecf0f1;
+	  
+	  transition: background-color .3s;
+	}
+	
+	.btn:hover, .btn:focus {
+	  background-color: #27ae60;
+	}
+	
+	.btn > * {
+	  position: relative;
+	}
+	
+	
+	.btn:before {
+	  content: "";
+	
+	  
+	  display: block;
+	  width: 0;
+	  padding-top: 0;
+		
+	  border-radius: 100%;
+	  
+	  background-color: rgba(236, 240, 241, .3);
+	  
+	  -webkit-transform: translate(-50%, -50%);
+	  -moz-transform: translate(-50%, -50%);
+	  -ms-transform: translate(-50%, -50%);
+	  -o-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+	
+	.btn:active:before {
+	  width: 120%;
+	  padding-top: 120%;
+	  
+	  transition: width .2s ease-out, padding-top .2s ease-out;
+	}
+	
+	/* Styles, not important */
+	*, *:before, *:after {
+	  box-sizing: border-box;
+	}
+	
+	html {
+	  position: relative;
+	  height: 100%;
+	}
+	
+	
+	h2 {
+	  font-weight: normal;
+	}
+	
+	.btn.orange {
+	  background-color: #e67e22;
+	}
+	
+	.btn.orange:hover, .btn.orange:focus {
+	  background-color: #d35400;
+	}
+	
+	.btn.red {
+	  background-color: #e74c3c;
+	}
+	
+	.btn.red:hover, .btn.red:focus {
+	  background-color: #c0392b;
+	}
+		</style>
+		<title>Inventory Management System</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/tableexport.css">
+		<link rel="stylesheet" type="text/css" href="/fonts/Righteous-Regular">
+		<link rel="stylesheet" type="text/css" href="/fonts/ShadowsIntoLight">
+		<link rel="stylesheet" type="text/css" href="/fonts/Merienda-Regular">
+		<link rel="stylesheet" type="text/css" href="/fonts/Merienda-Bold">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/css.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-combobox.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/jquery.ui.combify.css">
+		<script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script><script src="/javascript/FileSaver.js"></script>
+		<script src="/javascript/tableexport.js"></script>
+		<script src="/javascript/jquery.js"></script>
+		<script src="/javascript/jquery-ui.js"></script>
+		<script src="/javascript/jquery.table2excel.js"></script>
+		<script src="/javascript/xlsx.core.min.js"></script>	
+		<script type="text/javascript" src="/javascript/bootstrap-combobox.js"></script>
+		<script src="/javascript/jquery.ui.combify.js"></script>
+		<script src="/javascript/socket.io.js"></script>
+		<script src="/javascript/socket.io.slim.js"></script>
+		<script src="/javascript/bootstrap.js"></script>
+	</head>
+	<body style="">
+		<nav class="navbar navbar-light bg-light">
+			<div class="container-fluid" style="background-color:black;">
+					<a href="/" class="btn">Home</a>
+					<a class="btn" href="/inventory" title="">Inventory</a>
+					<a class="btn" href="/supplier" title="">Supplier List</a>
+					<!-- <a class="nav-item nav-link btn btn-outline-primary btn-lg" href="/PO" title="">PO List</a> -->
+					<!-- <a class="nav-item nav-link btn btn-outline-primary btn-lg" href="/input" title="">Input</a> -->
+					<!-- <a class="nav-item nav-link btn btn-outline-primary btn-lg" href="/output" title="">Output</a> -->
+					<!-- <a class="nav-item nav-link btn btn-outline-primary btn-lg" href="/report" title="">Reports</a> -->
+					<a class="btn" href="/finished_good" title="">Finished Goods</a>
+					<!-- <a class="nav-item nav-link btn btn-outline-primary btn-lg" href="/finished_good/PD" title="">Production/Dispatch</a> -->
+				</div>
+		 </nav>
+	<div class="container jumbotron">
+		<h1 align="center">Update Delete Raw Material</h1>
+		<br>
+		<form action="/inventory/122?_method=PUT" method="POST" id="ask">
+			<div class="row">
+				<div class="col-md-8">
+					<label for="raw_material[name]">Description</label>
+					<input type="text" name="raw_material[name]"  id="raw_material[name]" class="form-control" required="">
+				</div>
+				<div class="col-md-4">
+					<label for="raw_material[code]">Part Number</label>
+					<input type="text" name="raw_material[code]"  id="raw_material[code]" class="form-control" required="">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<label>DTPL Part Number: <input type="text" name="raw_material[DTPL_code]" class="form-control" required="" ></label>
+				</div>
+				<div class="col-md-4">
+					<label for="raw_material[unit]">Unit</label>
+					<input type="number" name="raw_material[unit]"  id="raw_material[unit]" class="form-control" required="">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-4">
+					<label for="raw_material[stock]">Current Stock</label>
+					<input type="number" name="raw_material[stock]" required="" id="raw_material[stock]"  class="form-control">
+				</div>
+				<div class="col-md-4">
+					<label>Line Stock: <input type="number" name="raw_material[line_stock]" required="" class="form-control"></label>
+				</div>
+				<div class="col-md-4">
+					<label for="raw_material[category]">Category</label>
+					<select name="raw_material[category]" id="raw_material[category]" required="" class="form-control">
+						<option value="Misc." hidden="" selected="">Misc.</option>
+						<option value="Coil">Coil</option>
+						<option value="Conector">Conector</option>
+						<option value="Consumables">Consumables</option>
+						<option value="Fuse">Fuse</option>
+						<option value="Grommet">Grommet</option>
+						<option value="Misc.">Misc.</option>
+						<option value="Sleeve">Sleeve</option>
+						<option value="Sticker">Sticker</option>
+						<option value="Tape">Tape</option>
+						<option value="Terminal">Terminal</option>
+						<option value="Wire">Wire</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label>Price: <input type="number" min="0"  name="raw_material[price]"  class="form-control" required=""></label>
+				</div>
+				<div class="col">
+					<label>Supplier:<select name="raw_material[supplier_code]" class="form-control">
+						<option value="TMTOOLS" hidden="" selected="" required="">TMTOOLS</option>
+						
+							<option value="ANKIT">ANKIT</option>
+						
+							<option value="NEXTSUPP">NEXTSUPP</option>
+						
+							<option value="ShubhamComp">ShubhamComp</option>
+						
+							<option value="TMTOOLS">TMTOOLS</option>
+						
+					</select></label>
+				</div>
+			</div>
+			<button type="button" data-toggle="modal" data-target="#askPassword" class="btn btn-success">Update</button>
+			
+		</form>
+		
+		<form action="/inventory/122?_method=DELETE" method="POST">
+			<button type="submit" class="btn btn-danger" style="align:right" onclick="return confirm('Are you sure you want to delete this Raw Material?');">Delete</button>
+		</form>
+	</div>
+	<div class="modal fade" id="askPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+				</div>
+				<form id="f">
+				<div class="modal-body">
+						<label>Password</label>
+						<input type="password" name="Password" class="form-control" id="pass" placeholder="Enter Password Here">
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Update</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+	$('#f').submit(function(event){
+		if($('#pass').val() === 'pwd'){
+			$('#ask').submit();
+			return false;
+		}
+		else {
+			alert("Password Incorrect!");
+			return false;
+		}
+	});
+	</script>
+	
+	
+	</body></html>

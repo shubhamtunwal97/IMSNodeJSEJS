@@ -1,0 +1,25 @@
+<% include partials/header.ejs %>
+<br>
+<h1 align="center">New Raw Material To BOM</h1>
+<div class="container jumbotron">
+	<form action="/finished_good/<%= code %>/new" method="post">
+		<div class="row">
+			<div class="col-md-6">
+				<label>Raw Material Code:
+					<input type="text" name="newCode" list="Product" required class="form-control">
+							<datalist id="Product" name="Product">	
+								<% for(var j=0;j<raw.length;j++){ %>
+									<option value="<%= raw[j].code %>"><%= raw[j].code %>$$<%= raw[j].DTPL_code %>$$<%= raw[j].name %></option>
+								<% } %>
+							</datalist>
+				</label>
+			</div>
+			<div class="col-md-6">
+				<label>Quantity: <input type="text" name="newQuantity" required></label>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success">Add</button>
+	</form>
+</div>
+
+<% include partials/footer.ejs %>

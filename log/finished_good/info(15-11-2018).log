@@ -1,0 +1,36 @@
+{"message":{"where":"POST /finished_good/new INSERT INTO finished_goods SET ?","what":{"code":"212","name":"ABC","customer":"PK","category":"Battery Cable"},"time":"2018-11-15T02:21:38.933Z"},"level":"info"}
+{"message":{"error":{"code":"ER_BAD_FIELD_ERROR","errno":1054,"sqlMessage":"Unknown column 'quantity' in 'field list'","sqlState":"42S22","index":0,"sql":"INSERT INTO finished_goods_detail SET `code` = '212', `raw_material_code` = 'undefined', `quantity` = '0'"},"where":"POST /finished_good/new INSERT INTO finished_goods_detail SET ?","time":"2018-11-15T02:21:38.943Z"},"level":"error"}
+{"message":{"error":{},"where":"POST /finished_good/new INSERT INTO finished_goods_detail SET ?","time":"2018-11-15T02:21:38.947Z"},"level":"error"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT UPDATE finished_goods SET ? WHERE code ='484'","time":"2018-11-15T05:44:22.670Z"},"level":"info"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:44:22.675Z"},"level":"info"}
+{"message":{"error":{},"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:44:22.676Z"},"level":"error"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT UPDATE finished_goods SET ? WHERE code ='484'","time":"2018-11-15T05:44:33.737Z"},"level":"info"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:44:33.740Z"},"level":"info"}
+{"message":{"error":{},"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:44:33.741Z"},"level":"error"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT UPDATE finished_goods SET ? WHERE code ='484'","time":"2018-11-15T05:49:35.478Z"},"level":"info"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:49:35.480Z"},"level":"info"}
+{"message":{"error":{},"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:49:35.481Z"},"level":"error"}
+{"message":{"where":"POST /finished_good/new INSERT INTO finished_goods SET ?","what":{"code":"89813","name":"PPP","customer":"313","category":"Indicator"},"time":"2018-11-15T05:50:10.985Z"},"level":"info"}
+{"message":{"error":{},"where":"POST /finished_good/new INSERT INTO finished_goods_detail SET ?","time":"2018-11-15T05:50:10.985Z"},"level":"error"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT UPDATE finished_goods SET ? WHERE code ='484'","time":"2018-11-15T05:50:29.313Z"},"level":"info"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:50:29.314Z"},"level":"info"}
+{"message":{"error":{},"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:50:29.315Z"},"level":"error"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT UPDATE finished_goods SET ? WHERE code ='484'","time":"2018-11-15T05:55:30.657Z"},"level":"info"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:55:30.659Z"},"level":"info"}
+{"message":{"error":{},"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:55:30.660Z"},"level":"error"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT UPDATE finished_goods SET ? WHERE code ='484'","time":"2018-11-15T05:55:37.499Z"},"level":"info"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:55:37.500Z"},"level":"info"}
+{"message":{"error":{},"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:55:37.500Z"},"level":"error"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT UPDATE finished_goods SET ? WHERE code ='484'","time":"2018-11-15T05:55:52.706Z"},"level":"info"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:55:52.707Z"},"level":"info"}
+{"message":{"error":{},"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:55:52.707Z"},"level":"error"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT UPDATE finished_goods SET ? WHERE code ='484'","time":"2018-11-15T05:55:58.616Z"},"level":"info"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:55:58.617Z"},"level":"info"}
+{"message":{"error":{},"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:55:58.617Z"},"level":"error"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT UPDATE finished_goods SET ? WHERE code ='484'","time":"2018-11-15T05:56:36.676Z"},"level":"info"}
+{"message":{"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:56:36.677Z"},"level":"info"}
+{"message":{"error":{},"where":"PUT /finished_good/484?_method=PUT DELETE FROM finished_goods_detail WHERE code='484'","time":"2018-11-15T05:56:36.678Z"},"level":"error"}
+{"message":{"error":{"code":"ER_TRUNCATED_WRONG_VALUE_FOR_FIELD","errno":1366,"sqlMessage":"Incorrect integer value: 'New Material' for column 'code' at row 1","sqlState":"HY000","index":0,"sql":"INSERT INTO finished_goods SET `code` = 'New Material', `name` = 'PQR', `customer` = 'XYZ', `category` = 'Magneto'"},"where":"POST /finished_good/new INSERT INTO finished_goods SET ?","time":"2018-11-15T05:57:15.785Z"},"level":"error"}
+{"message":{"where":"POST /finished_good/new INSERT INTO finished_goods SET ?","what":{"code":"313","name":"ABC","customer":"31c","category":"Magneto"},"time":"2018-11-15T05:57:38.086Z"},"level":"info"}
+{"message":{"error":{"code":"ER_BAD_FIELD_ERROR","errno":1054,"sqlMessage":"Unknown column 'quantity' in 'field list'","sqlState":"42S22","index":0,"sql":"INSERT INTO finished_goods_detail SET `code` = '313', `raw_material_code` = 'undefined', `quantity` = '12'"},"where":"POST /finished_good/new INSERT INTO finished_goods_detail SET ?","time":"2018-11-15T05:57:38.089Z"},"level":"error"}
+{"message":{"error":{},"where":"POST /finished_good/new INSERT INTO finished_goods_detail SET ?","time":"2018-11-15T05:57:38.091Z"},"level":"error"}

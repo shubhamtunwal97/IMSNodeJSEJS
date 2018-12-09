@@ -1,0 +1,11 @@
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T10:36:18.679Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T10:42:06.179Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T10:42:10.252Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T10:51:34.247Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T10:51:34.526Z"},"level":"error"}
+{"message":{"error":{"fatal":true,"code":"PROTOCOL_CONNECTION_LOST"},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T11:14:39.948Z"},"level":"error"}
+{"message":{"error":{"fatal":true,"code":"PROTOCOL_CONNECTION_LOST"},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T11:14:39.950Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T11:17:47.558Z"},"level":"error"}
+{"message":{"error":{"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":3306,"fatal":true},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T11:19:04.716Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T11:20:40.951Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /PO SELECT * FROM PO ORDER BY supplier_code,date","time":"2018-10-28T12:34:13.940Z"},"level":"error"}

@@ -1,0 +1,5 @@
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /finished_good SELECT * FROM finished_goods ORDER BY category","time":"2018-10-28T10:36:21.414Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /finished_good/dispatch SELECT * FROM finished_goods ORDER BY code","time":"2018-10-28T10:42:16.378Z"},"level":"error"}
+{"message":{"error":{"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":3306,"fatal":true},"where":"GET /finished_good/dispatch SELECT * FROM finished_goods ORDER BY code","time":"2018-10-28T10:49:18.988Z"},"level":"error"}
+{"message":{"error":{"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":3306,"fatal":true},"where":"GET /finished_good/dispatch SELECT * FROM finished_goods ORDER BY code","time":"2018-10-28T10:51:25.449Z"},"level":"error"}
+{"message":{"error":{"code":"PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR","fatal":false},"where":"GET /finished_good SELECT * FROM finished_goods ORDER BY category","time":"2018-10-28T11:20:43.705Z"},"level":"error"}

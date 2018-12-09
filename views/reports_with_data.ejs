@@ -1,0 +1,80 @@
+<% include partials/header.ejs %>
+<br>
+<h1 align="center">View Report</h1>
+<br>
+<div class="container">
+	<div class="jumbotron">
+		<form>
+			<fieldset>
+				<div class="row">
+					<div class="col-md-6">
+						<label><strong>Raw Material Name</strong><input type="text" name="raw_material_name" class="form-control-plaintext" value="<%= raw_material.name %>"></label>
+					</div>
+					<div class="col-md-6">
+						<label><strong>Code</strong><input type="text" name="raw_material_code" class="form-control-plaintext" value="<%= raw_material.code %>"></label>
+					</div>
+				</div>
+			</fieldset>
+			<div class="row">
+				<div class="col-md-4">
+					<label><strong>Current Stock</strong><input type="text" name="current_stock" class="form-control-plaintext" value="<%= raw_material.stock %>"></label>
+				</div>
+				<div class="col-md-4">
+					<label><strong>From:</strong><input type="date" value="<%= from %>" class="form-control-plaintext"></label>
+				</div>
+				<div class="col-md-4">
+					<label><strong>To:</strong><input type="date" value="<%= to %>" class="form-control-plaintext"></label>
+				</div>
+			</div>
+		</form>
+	</div>
+	<br>
+	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Invoice No/Slip No</th>
+				<th>Inwards</th>
+				<th>Outwards</th>
+				<th>Date (yyyy/mm/dd)</th>
+				<th>Stock</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>From: <%= from %></td>
+				<td>Opening: <%= openingStock %></td>
+			</tr>
+			<% for(var i=0;i<input_output.length;i++){ %>
+				<tr>
+					<% if(input_output[i].PO_code){ %>
+						<td>Invoice Number: <%= input_output[i].invoice_no %>/PO Number: <%= input_output[i].PO_code %></td>
+						<td><%= input_output[i].quantity %><span style="display:none"><% total_in += input_output[i].quantity %></span></td>
+						<td></td>
+						<td><%= input_output[i].date.toISOString().substring(0,10) %></td>
+						<td><% openingStock += input_output[i].quantity %><%= openingStock %></td>
+					<% } else { %>
+						<td>Slip Number: <%= input_output[i].slip_no %></td>
+						<td></td>
+						<td><%= input_output[i].quantity %><span style="display:none"><% total_out += input_output[i].quantity %></span></td>
+						<td><%= input_output[i].date.toISOString().substring(0,10) %></td>
+						<td><% openingStock -= input_output[i].quantity %><%= openingStock %></td>
+					<% } %>
+				</tr>
+			<% } %>
+			<tr>
+				<td></td>
+				<td>Total: <%= total_in %></td>
+				<td>Total: <%= total_out %></td>
+				<td>To: <%= to %></td>
+				<td>Closing: <%= closingStock %></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+	new TableExport(document.getElementsByTagName("table"),{bootstrap:false,headers:true,formats:['csv','xls','xlsx'],ignoreCols:[]});
+</script>
+<% include partials/footer.ejs %>
