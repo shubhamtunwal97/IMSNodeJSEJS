@@ -1,6 +1,5 @@
 var express=require("express");
 var app=express();
-var port=process.env.Port || 8080;
 app.use(express.static(__dirname));
 
 // Set view engine as EJS
@@ -18,6 +17,6 @@ app.get("*",function(req,res){
     // app.render
 });
 
-app.listen(port, function(){
+app.listen(process.env.PORT || 7890, function(){
     console.log(" app 12345 running")
 });
